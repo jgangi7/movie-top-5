@@ -81,22 +81,24 @@ function App() {
             className="background-video"
             src={selectedMovie.videoUrl}
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             title={selectedMovie.title}
             loading="eager"
-            onError={handleIframeError}
-            onLoad={handleIframeLoad}
             style={{
               width: '100%',
               height: '100%',
               position: 'absolute',
               top: '50%',
               left: '50%',
-              transform: 'translate(-50%, -50%)',
+              transform: 'translate(-50%, -50%) scale(1.5)',
               pointerEvents: 'none',
-              opacity: 0.8
+              opacity: 0.8,
+              border: 'none',
+              background: '#000'
             }}
+            onError={handleIframeError}
+            onLoad={handleIframeLoad}
           ></iframe>
           <div style={{ position: 'fixed', bottom: 10, left: 10, background: 'rgba(0,0,0,0.8)', padding: '5px', zIndex: 1000 }}>
             Debug: {selectedMovie.videoUrl}
