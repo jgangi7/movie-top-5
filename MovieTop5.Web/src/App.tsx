@@ -1,13 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Movie } from './types/Movie';
 import './App.css';
+
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+    YT: any;
+  }
+}
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      console.log('YouTube IFrame API Ready');
+    };
+
     console.log('Fetching movies from API...');
     fetch('http://localhost:5072/api/movies')
       .then(response => {
@@ -41,8 +59,23 @@ function App() {
     console.error('Iframe failed to load:', selectedMovie?.videoUrl);
   };
 
-  const handleIframeLoad = () => {
+  const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
     console.log('Iframe loaded successfully for:', selectedMovie?.title);
+    
+    // Get the iframe element
+    const iframe = event.currentTarget;
+    
+    // Create new player
+    if (window.YT && selectedMovie) {
+      playerRef.current = new window.YT.Player(iframe, {
+        events: {
+          onReady: (event: any) => {
+            console.log('Player ready');
+            event.target.playVideo();
+          }
+        }
+      });
+    }
   };
 
   if (error) {
