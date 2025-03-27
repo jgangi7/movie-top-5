@@ -15,7 +15,7 @@ public class MoviesController : ControllerBase
             Title = "Parasite",
             Description = "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
             ImageUrl = "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg",
-            VideoUrl = "https://www.youtube.com/embed/5xH0HfJHsaY?autoplay=1&mute=1&controls=0&loop=1&playlist=5xH0HfJHsaY&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
+            VideoUrl = "https://www.youtube.com/embed/5xH0HfJHsaY?start=60&end=64&autoplay=1&mute=1&controls=0&loop=1&playlist=5xH0HfJHsaY&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
             Year = 2019,
             Director = "Bong Joon Ho",
             Rating = 8.6
@@ -37,7 +37,7 @@ public class MoviesController : ControllerBase
             Title = "Gone Girl",
             Description = "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent.",
             ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTk0MDQ3MzAzOV5BMl5BanBnXkFtZTgwNzU1NzE3MjE@._V1_.jpg",
-            VideoUrl = "https://www.youtube.com/embed/2-_-1nJf8Vg?autoplay=1&mute=1&controls=0&loop=1&playlist=2-_-1nJf8Vg&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
+            VideoUrl = "https://www.youtube.com/embed/2-_-1nJf8Vg?start=40&end=44&autoplay=1&mute=1&controls=0&loop=1&playlist=2-_-1nJf8Vg&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
             Year = 2014,
             Director = "David Fincher",
             Rating = 8.1
@@ -48,7 +48,7 @@ public class MoviesController : ControllerBase
             Title = "The Girl with the Dragon Tattoo",
             Description = "A journalist is aided by a young female hacker in his search for the killer of a woman who has been dead for forty years.",
             ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTk2NDc3MTAzN15BMl5BanBnXkFtZTcwNTAyNDY3Nw@@._V1_.jpg",
-            VideoUrl = "https://www.youtube.com/embed/DqQe3OrsMKI?autoplay=1&mute=1&controls=0&loop=1&playlist=DqQe3OrsMKI&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
+            VideoUrl = "https://www.youtube.com/embed/DqQe3OrsMKI?start=71&end=75&autoplay=1&mute=1&controls=0&loop=1&playlist=DqQe3OrsMKI&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
             Year = 2011,
             Director = "David Fincher",
             Rating = 7.8
@@ -59,7 +59,7 @@ public class MoviesController : ControllerBase
             Title = "Focus",
             Description = "In the midst of veteran con man Nicky's latest scheme, a woman from his past - now an accomplished femme fatale - shows up and throws his plans for a loop.",
             ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTUwODg2OTA4OF5BMl5BanBnXkFtZTgwOTE5MTE4MzE@._V1_.jpg",
-            VideoUrl = "https://www.youtube.com/embed/MxCRgtdAuBo?autoplay=1&mute=1&controls=0&loop=1&playlist=MxCRgtdAuBo&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
+            VideoUrl = "https://www.youtube.com/embed/MxCRgtdAuBo?start=55&end=59&autoplay=1&mute=1&controls=0&loop=1&playlist=MxCRgtdAuBo&playsinline=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3",
             Year = 2015,
             Director = "Glenn Ficarra, John Requa",
             Rating = 6.6
