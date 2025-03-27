@@ -72,9 +72,23 @@ function App() {
           onReady: (event: any) => {
             console.log('Player ready');
             event.target.playVideo();
+          },
+          onStateChange: (event: any) => {
+            // If video ends, restart it
+            if (event.data === window.YT.PlayerState.ENDED) {
+              event.target.playVideo();
+            }
           }
         }
       });
+    }
+  };
+
+  const handleMovieHover = (movie: Movie) => {
+    setSelectedMovie(movie);
+    // If we have an existing player, stop it
+    if (playerRef.current) {
+      playerRef.current.stopVideo();
     }
   };
 
@@ -100,7 +114,7 @@ function App() {
           <h2
             key={movie.id}
             className={`movie-title ${movie.id === selectedMovie?.id ? 'active' : ''}`}
-            onClick={() => setSelectedMovie(movie)}
+            onMouseEnter={() => handleMovieHover(movie)}
           >
             {movie.title}
             <span className="movie-year">{movie.year}</span>
@@ -126,9 +140,9 @@ function App() {
               left: '50%',
               transform: 'translate(-50%, -50%) scale(1.5)',
               pointerEvents: 'none',
-              opacity: 0.8,
               border: 'none',
-              background: '#000'
+              background: '#000',
+              transition: 'opacity 0.3s ease-in-out'
             }}
             onError={handleIframeError}
             onLoad={handleIframeLoad}
