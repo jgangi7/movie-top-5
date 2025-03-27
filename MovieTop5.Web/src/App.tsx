@@ -100,9 +100,6 @@ function App() {
             onError={handleIframeError}
             onLoad={handleIframeLoad}
           ></iframe>
-          <div style={{ position: 'fixed', bottom: 10, left: 10, background: 'rgba(0,0,0,0.8)', padding: '5px', zIndex: 1000 }}>
-            Debug: {selectedMovie.videoUrl}
-          </div>
         </div>
       )}
 
