@@ -1,13 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Movie } from './types/Movie';
 import './App.css';
+
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+    YT: any;
+  }
+}
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const playerRef = useRef<any>(null);
 
   useEffect(() => {
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      console.log('YouTube IFrame API Ready');
+    };
+
     console.log('Fetching movies from API...');
     fetch('http://localhost:5072/api/movies')
       .then(response => {
@@ -41,8 +59,37 @@ function App() {
     console.error('Iframe failed to load:', selectedMovie?.videoUrl);
   };
 
-  const handleIframeLoad = () => {
+  const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
     console.log('Iframe loaded successfully for:', selectedMovie?.title);
+    
+    // Get the iframe element
+    const iframe = event.currentTarget;
+    
+    // Create new player
+    if (window.YT && selectedMovie) {
+      playerRef.current = new window.YT.Player(iframe, {
+        events: {
+          onReady: (event: any) => {
+            console.log('Player ready');
+            event.target.playVideo();
+          },
+          onStateChange: (event: any) => {
+            // If video ends, restart it
+            if (event.data === window.YT.PlayerState.ENDED) {
+              event.target.playVideo();
+            }
+          }
+        }
+      });
+    }
+  };
+
+  const handleMovieHover = (movie: Movie) => {
+    setSelectedMovie(movie);
+    // If we have an existing player, stop it
+    if (playerRef.current) {
+      playerRef.current.stopVideo();
+    }
   };
 
   if (error) {
@@ -67,7 +114,7 @@ function App() {
           <h2
             key={movie.id}
             className={`movie-title ${movie.id === selectedMovie?.id ? 'active' : ''}`}
-            onClick={() => setSelectedMovie(movie)}
+            onMouseEnter={() => handleMovieHover(movie)}
           >
             {movie.title}
             <span className="movie-year">{movie.year}</span>
@@ -81,26 +128,25 @@ function App() {
             className="background-video"
             src={selectedMovie.videoUrl}
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             title={selectedMovie.title}
             loading="eager"
-            onError={handleIframeError}
-            onLoad={handleIframeLoad}
             style={{
               width: '100%',
               height: '100%',
               position: 'absolute',
               top: '50%',
               left: '50%',
-              transform: 'translate(-50%, -50%)',
+              transform: 'translate(-50%, -50%) scale(1.5)',
               pointerEvents: 'none',
-              opacity: 0.8
+              border: 'none',
+              background: '#000',
+              transition: 'opacity 0.3s ease-in-out'
             }}
+            onError={handleIframeError}
+            onLoad={handleIframeLoad}
           ></iframe>
-          <div style={{ position: 'fixed', bottom: 10, left: 10, background: 'rgba(0,0,0,0.8)', padding: '5px', zIndex: 1000 }}>
-            Debug: {selectedMovie.videoUrl}
-          </div>
         </div>
       )}
 
