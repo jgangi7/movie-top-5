@@ -163,7 +163,7 @@ function App() {
       {showModal && selectedMovie && (
         <div className="movie-modal">
           <div className="modal-content">
-           
+            <button className="close-button" onClick={handleCloseModal}>×</button>
             <div className="modal-info">
               <h2>{selectedMovie.title}</h2>
               <p className="director">Directed by {selectedMovie.director}</p>
