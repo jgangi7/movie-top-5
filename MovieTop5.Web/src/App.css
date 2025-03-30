@@ -145,8 +145,11 @@
 .modal-content {
   position: relative;
   width: 90%;
-  max-width: 1200px;
+  max-width: 500px;
   background: #000;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .modal-content img {
@@ -156,19 +159,20 @@
 }
 
 .modal-info {
-  padding: 2rem;
+  padding: 0.5rem 0;
 }
 
 .modal-info h2 {
   font-size: 2rem;
   font-weight: 400;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .modal-info p {
   margin: 0.5rem 0;
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .modal-info .director {
@@ -176,26 +180,34 @@
   color: #ccc;
 }
 
+.modal-info .year {
+  color: #999;
+}
+
 .modal-info .rating {
   color: #ffd700;
+  font-size: 1.2rem;
 }
 
 .modal-info .description {
   margin-top: 1.5rem;
   color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .close-button {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background: none;
   border: none;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease;
+  z-index: 1001;
 }
 
 .close-button:hover {

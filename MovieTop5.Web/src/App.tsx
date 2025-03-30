@@ -13,6 +13,7 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const playerRef = useRef<any>(null);
 
   useEffect(() => {
@@ -92,6 +93,14 @@ function App() {
     }
   };
 
+  const handleMovieClick = (movie: Movie) => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   if (error) {
     return (
       <div className="app">
@@ -115,6 +124,7 @@ function App() {
             key={movie.id}
             className={`movie-title ${movie.id === selectedMovie?.id ? 'active' : ''}`}
             onMouseEnter={() => handleMovieHover(movie)}
+            onClick={() => handleMovieClick(movie)}
           >
             {movie.title}
             <span className="movie-year">{movie.year}</span>
@@ -150,10 +160,10 @@ function App() {
         </div>
       )}
 
-      {selectedMovie && (
-        <div className="movie-modal" style={{ display: 'none' }}>
+      {showModal && selectedMovie && (
+        <div className="movie-modal">
           <div className="modal-content">
-            <button className="close-button" onClick={() => setSelectedMovie(null)}>×</button>
+            <button className="close-button" onClick={handleCloseModal}>×</button>
             <div className="modal-info">
               <h2>{selectedMovie.title}</h2>
               <p className="director">Directed by {selectedMovie.director}</p>
