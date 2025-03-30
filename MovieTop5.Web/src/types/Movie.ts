@@ -3,6 +3,7 @@ export interface Movie {
     title: string;
     description: string;
     videoUrl: string;
+    imageUrl: string;
     year: number;
     director: string;
     rating: number;
