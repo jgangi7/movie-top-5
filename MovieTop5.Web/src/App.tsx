@@ -93,7 +93,7 @@ function App() {
     }
   };
 
-  const handleMovieClick = (movie: Movie) => {
+  const handleMovieClick = () => {
     setShowModal(true);
   };
 
@@ -124,7 +124,7 @@ function App() {
             key={movie.id}
             className={`movie-title ${movie.id === selectedMovie?.id ? 'active' : ''}`}
             onMouseEnter={() => handleMovieHover(movie)}
-            onClick={() => handleMovieClick(movie)}
+            onClick={() => handleMovieClick()}
           >
             {movie.title}
             <span className="movie-year">{movie.year}</span>
